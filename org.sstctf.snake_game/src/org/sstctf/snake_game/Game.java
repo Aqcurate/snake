@@ -18,7 +18,7 @@ public class Game extends Canvas implements Runnable {
     private volatile boolean running = false;
     private Handler handler;
     private HUD hud;
-    
+
     private DBConnect db;
     private boolean hasDB;
     private String leaderboard;
@@ -64,27 +64,27 @@ public class Game extends Canvas implements Runnable {
     public synchronized void stop() {
         running = false;
     }
-    
+
     // Game Loop
     public void run() {
         this.requestFocus();
-        
+
         long lastTime = System.nanoTime();
         double amountOfTicks = 15.0;
         double ns = 1000000000 / amountOfTicks; // Amount of times our ticks go into 1 second
         double delta = 0.0;
-        
+
         while (running) {
             long currentTime = System.nanoTime();
             delta += (currentTime - lastTime) / ns;
             lastTime = currentTime;
-            
+
             // While one tick of time has passed
             while (delta >= 1) {
                 tick();
                 delta--;
             }
-            
+
             if (running) render();
         }
         
@@ -97,7 +97,7 @@ public class Game extends Canvas implements Runnable {
             hud.tick();
         } 
     }
-    
+
     private void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if (bs == null) {
@@ -131,7 +131,7 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
     }
-    
+
     public static void main(String[] args) {
         new Game();
     }

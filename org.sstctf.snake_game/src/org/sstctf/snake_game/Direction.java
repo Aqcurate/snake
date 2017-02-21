@@ -7,8 +7,8 @@ public enum Direction {
     EAST,
     WEST,
     NONE;
-    
-	// Finding the complements to the directions
+
+    // Finding the complements to the directions
     public Direction opposite() {
         switch(this) {
             case NORTH: return Direction.SOUTH;
