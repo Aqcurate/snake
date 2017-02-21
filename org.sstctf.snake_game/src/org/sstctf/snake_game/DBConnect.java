@@ -16,18 +16,18 @@ public class DBConnect {
         pass = "guest";
         limiter = 1;
     }
-    private Connection connectDB() throws SQLException{
+    private Connection connectDB() throws SQLException {
         Connection con = DriverManager.getConnection(host ,user, pass);
         return con;
     }
 
-    public String getScores(HUD hud) throws SQLException{
+    public String getScores(HUD hud) throws SQLException {
         Connection conn = connectDB();
 
         StringBuilder sb = new StringBuilder();
         Statement stmt = conn.createStatement();
         ResultSet results = stmt.executeQuery("SELECT * from leaderboards ORDER BY score DESC");
-        while(results.next()){
+        while(results.next()) {
             sb.append(results.getString("name") + ", " + results.getInt("score") + " || ");
         }
         stmt.close();
@@ -36,7 +36,7 @@ public class DBConnect {
         return s;
     }
 
-    public void update(int points) throws SQLException  {
+    public void update(int points) throws SQLException {
         if (limiter != 0) {
             Connection conn = connectDB();
             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name,score) VALUES ('guest2',?)");

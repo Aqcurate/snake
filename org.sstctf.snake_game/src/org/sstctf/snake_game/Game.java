@@ -21,11 +21,14 @@ public class Game extends Canvas implements Runnable {
     private DBConnect db;
     
     public static State gameState = State.GAME;
+    private boolean hasDB;
     
     public Game() {
         handler = new Handler();
         hud = new HUD(handler);
         db = new DBConnect();
+        hasDB = true;
+        
         this.addKeyListener(new KeyInput(handler));
         
         new Window(WIDTH, HEIGHT, NAME, this);
@@ -99,13 +102,16 @@ public class Game extends Canvas implements Runnable {
             g.setColor(Color.BLACK);
             g.drawString("Press R to Retry", 16, 16);
             
-            try{
-            g.drawString("Final Score: " + hud.getScore(), 16, 32);
-            db.update(hud.getScore());
-            g.drawString("Leader Boards: " + db.getScores(hud),16,64);
-            }
-            catch (SQLException S){
-            System.out.println(S.getMessage());
+            if (hasDB) {
+                try {
+                    g.drawString("Final Score: " + hud.getScore(), 16, 32);
+                    db.update(hud.getScore());
+                    g.drawString("Leader Boards: " + db.getScores(hud),16,64);
+                }
+                catch (SQLException S) {
+                    hasDB = false;
+                    System.out.println(S.getMessage());
+                }
             }
         }
         
