@@ -7,7 +7,7 @@ Snake Game
 ## Usage
 
 ```
-$ git clone https://github.com/username/software-project.git
+$ git clone https://github.com/SST-CTF/snake.git
 ```
 
 ## Contributors
