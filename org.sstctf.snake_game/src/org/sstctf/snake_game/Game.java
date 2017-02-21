@@ -4,33 +4,55 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.sql.SQLException;
 
 public class Game extends Canvas implements Runnable {
 
     private static final long serialVersionUID = -4394636783234289567L;
-
+    
     public static final int WIDTH = 640, HEIGHT = 640; 
     public static final int SCALE = 16;
     public static final String NAME = "SNAKE";
-
+    
     private Thread thread;
     private volatile boolean running = false;
     private Handler handler;
     private HUD hud;
 
+    private DBConnect db;
+    private boolean hasDB;
+    private String leaderboard;
+    
     public static State gameState = State.GAME;
-
+    
     public Game() {
         handler = new Handler();
         hud = new HUD(handler);
-        this.addKeyListener(new KeyInput(handler));
-
+        db = new DBConnect();
+        hasDB = true;
+        leaderboard = "";
+        
+        this.addKeyListener(new KeyInput(handler, this));
+        
         new Window(WIDTH, HEIGHT, NAME, this);
         handler.addObject(new Board(0, 0, handler));
-        handler.addObject(new Snake(1, 1, handler));
+        handler.addObject(new Snake(1, 1, handler, this));
         handler.addObject(new Pellet(5, 5, handler));
     }
-
+    
+    public void onDeath() {
+        gameState = State.DEATH;
+        if (hasDB) {
+            try {
+                db.update(hud.getScore());
+                leaderboard = db.getScores(hud);
+            } catch (SQLException s) {
+                hasDB = false;
+                System.out.println(s.getMessage());
+            }
+        }
+    }
+    
     // Start the thread
     public synchronized void start() {
         thread = new Thread(this);
@@ -65,10 +87,10 @@ public class Game extends Canvas implements Runnable {
 
             if (running) render();
         }
-
+        
         stop();
     }
-
+    
     private void tick() {
         if (gameState == State.GAME) {
             handler.tick();
@@ -82,9 +104,9 @@ public class Game extends Canvas implements Runnable {
             this.createBufferStrategy(3); // Triple buffering
             return;
         }
-
+        
         Graphics g = bs.getDrawGraphics();
-
+        
         // Background
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, WIDTH+100, HEIGHT+100);
@@ -93,11 +115,19 @@ public class Game extends Canvas implements Runnable {
             handler.render(g);
             hud.render(g);
         } else if (gameState == State.DEATH) {
+            // TODO: Move menu to another class
             g.setColor(Color.BLACK);
             g.drawString("Press R to Retry", 16, 16);
+            
+            int leaderboardY = 48;
             g.drawString("Final Score: " + hud.getScore(), 16, 32);
+            g.drawString("Leaderboard:", 16, leaderboardY +=16);
+            g.drawString("Name - Score", 16, leaderboardY +=16);
+            for (String line : leaderboard.split("\n")) {
+                g.drawString(line, 16, leaderboardY += 16);
+            }
         }
-
+        
         g.dispose();
         bs.show();
     }
