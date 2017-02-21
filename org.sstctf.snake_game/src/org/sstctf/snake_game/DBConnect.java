@@ -12,13 +12,11 @@ public class DBConnect {
     private String host;
     private String user;
     private String pass;
-    private int limiter;
 
     public DBConnect() {
         host = "jdbc:mysql://localhost/game?useSSL=false";
         user = "guest";
         pass = "guest";
-        limiter = 1;
     }
     
     private Connection connectDB() throws SQLException {
@@ -40,14 +38,11 @@ public class DBConnect {
     }
 
     public void update(int points) throws SQLException {
-        if (limiter != 0) {
-            Connection conn = connectDB();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES ('guest2', ?)");
-            pstmt.setInt(1, points);
-            pstmt.executeUpdate();
-            conn.close();
-            limiter = 0;
-        }
+        Connection conn = connectDB();
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES ('guest2', ?)");
+        pstmt.setInt(1, points);
+        pstmt.executeUpdate();
+        conn.close();
     }
 }
 

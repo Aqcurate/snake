@@ -31,6 +31,8 @@ public class Game extends Canvas implements Runnable {
         db = new DBConnect();
         hasDB = true;
         leaderboard = "";
+        setIgnoreRepaint(true);
+        setBounds(0, 0, WIDTH, HEIGHT+100);
         
         this.addKeyListener(new KeyInput(handler, this));
         
@@ -108,8 +110,8 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
         
         // Background
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, WIDTH+100, HEIGHT+100);
+        // g.setColor(Color.WHITE);
+        // g.fillRect(0, 0, WIDTH, HEIGHT);
 
         if (gameState == State.GAME) {
             handler.render(g);

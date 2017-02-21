@@ -1,26 +1,23 @@
 package org.sstctf.snake_game;
 
-import java.awt.Canvas;
 import java.awt.Dimension;
-
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 // Window for the game
-public class Window extends Canvas {
-
-    private static final long serialVersionUID = -4453391185232301469L;
-
+public class Window {
     public Window(int width, int height, String title, Game game) {
         JFrame frame = new JFrame(title);
-
-        frame.setPreferredSize(new Dimension(width+100, height+100));
-        frame.setMaximumSize(new Dimension(width+100, height+100));
-        frame.setMinimumSize(new Dimension(width+100, height+100));
+        JPanel panel = (JPanel) frame.getContentPane();
+        
+        panel.setPreferredSize(new Dimension(width, height+100));
+        panel.setLayout(null);
+        panel.add(game);
+        frame.pack();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
-        frame.getContentPane().add(game);
 
         frame.setVisible(true);
 
