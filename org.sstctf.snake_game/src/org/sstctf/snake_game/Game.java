@@ -106,11 +106,10 @@ public class Game extends Canvas implements Runnable {
                 try {
                     g.drawString("Final Score: " + hud.getScore(), 16, 32);
                     db.update(hud.getScore());
-                    g.drawString("Leader Boards: " + db.getScores(hud),16,64);
-                }
-                catch (SQLException S) {
+                    g.drawString("Leader Boards: " + db.getScores(hud), 16, 64);
+                } catch (SQLException s) {
                     hasDB = false;
-                    System.out.println(S.getMessage());
+                    System.out.println(s.getMessage());
                 }
             }
         }

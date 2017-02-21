@@ -1,7 +1,11 @@
 package org.sstctf.snake_game;
 
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DBConnect {
 
@@ -16,18 +20,18 @@ public class DBConnect {
         pass = "guest";
         limiter = 1;
     }
+    
     private Connection connectDB() throws SQLException {
-        Connection con = DriverManager.getConnection(host ,user, pass);
+        Connection con = DriverManager.getConnection(host, user, pass);
         return con;
     }
 
     public String getScores(HUD hud) throws SQLException {
         Connection conn = connectDB();
-
         StringBuilder sb = new StringBuilder();
         Statement stmt = conn.createStatement();
         ResultSet results = stmt.executeQuery("SELECT * from leaderboards ORDER BY score DESC");
-        while(results.next()) {
+        while (results.next()) {
             sb.append(results.getString("name") + ", " + results.getInt("score") + " || ");
         }
         stmt.close();
