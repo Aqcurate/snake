@@ -5,9 +5,11 @@ import java.awt.event.KeyEvent;
 
 public class KeyInput extends KeyAdapter {
 	private Handler handler;
+	private Game game;
 	
-	public KeyInput(Handler handler) {
+	public KeyInput(Handler handler, Game game) {
 		this.handler = handler;
+		this.game = game;
 	}
 	
 	public void keyPressed(KeyEvent event) {
@@ -27,7 +29,7 @@ public class KeyInput extends KeyAdapter {
 		if (key == KeyEvent.VK_R) {
 			handler.removeAll();
 			handler.addObject(new Board(0, 0, handler));
-			handler.addObject(new Snake(1, 1, handler));
+			handler.addObject(new Snake(1, 1, handler, game));
 			handler.addObject(new Pellet(5, 5, handler));
 			Game.gameState = State.GAME;
 		}

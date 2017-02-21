@@ -15,15 +15,15 @@ public class DBConnect {
     private int limiter;
 
     public DBConnect() {
-        host = "jdbc:mysql://localhost/game";
+        host = "jdbc:mysql://localhost/game?useSSL=false";
         user = "guest";
         pass = "guest";
         limiter = 1;
     }
     
     private Connection connectDB() throws SQLException {
-        Connection con = DriverManager.getConnection(host, user, pass);
-        return con;
+        Connection conn = DriverManager.getConnection(host, user, pass);
+        return conn;
     }
 
     public String getScores(HUD hud) throws SQLException {
@@ -32,18 +32,17 @@ public class DBConnect {
         Statement stmt = conn.createStatement();
         ResultSet results = stmt.executeQuery("SELECT * from leaderboards ORDER BY score DESC");
         while (results.next()) {
-            sb.append(results.getString("name") + ", " + results.getInt("score") + " || ");
+            sb.append(results.getString("name") + " - " + results.getInt("score") + "\n");
         }
         stmt.close();
         conn.close();
-        String s = sb.toString();
-        return s;
+        return sb.toString();
     }
 
     public void update(int points) throws SQLException {
         if (limiter != 0) {
             Connection conn = connectDB();
-            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name,score) VALUES ('guest2',?)");
+            PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES ('guest2', ?)");
             pstmt.setInt(1, points);
             pstmt.executeUpdate();
             conn.close();

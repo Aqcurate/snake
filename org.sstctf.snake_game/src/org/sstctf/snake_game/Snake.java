@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Snake extends GameObject {
@@ -16,8 +15,9 @@ public class Snake extends GameObject {
 	private List<int[]> snakeParts = new ArrayList<int[]>();
 	
 	private Handler handler;
+	private Game game;
 
-	public Snake(int posX, int posY, Handler handler) {
+	public Snake(int posX, int posY, Handler handler, Game game) {
 		super(posX, posY, ID.Snake);
 		direction = Direction.NONE;
 		inputDirection = Direction.NONE;
@@ -25,6 +25,7 @@ public class Snake extends GameObject {
 		length = snakeParts.size();
 		
 		this.handler = handler;
+		this.game = game;
 	}
 
 	// Moving the snake based on input direction
@@ -93,7 +94,7 @@ public class Snake extends GameObject {
 			if (temp.getID() == ID.Snake) {
 				for (int j = 0; j < temp.getBounds().size() - 1; j++) {
 					if (getBounds().get(getBounds().size()-1).intersects(temp.getBounds().get(j))) {
-						Game.gameState = State.DEATH;
+						game.onDeath();
 					}
 				}
 			}
@@ -101,7 +102,7 @@ public class Snake extends GameObject {
 			if (temp.getID() == ID.Board) {
 				for (int j = 0; j < temp.getBounds().size(); j++) {
 					if (getBounds().get(getBounds().size()-1).intersects(temp.getBounds().get(j))) {
-						Game.gameState = State.DEATH;
+					    game.onDeath();
 					}
 				}
 			}

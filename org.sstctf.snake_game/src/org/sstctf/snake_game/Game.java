@@ -18,23 +18,39 @@ public class Game extends Canvas implements Runnable {
     private volatile boolean running = false;
     private Handler handler;
     private HUD hud;
+    
     private DBConnect db;
+    private boolean hasDB;
+    private String leaderboard;
     
     public static State gameState = State.GAME;
-    private boolean hasDB;
     
     public Game() {
         handler = new Handler();
         hud = new HUD(handler);
         db = new DBConnect();
         hasDB = true;
+        leaderboard = "";
         
-        this.addKeyListener(new KeyInput(handler));
+        this.addKeyListener(new KeyInput(handler, this));
         
         new Window(WIDTH, HEIGHT, NAME, this);
         handler.addObject(new Board(0, 0, handler));
-        handler.addObject(new Snake(1, 1, handler));
+        handler.addObject(new Snake(1, 1, handler, this));
         handler.addObject(new Pellet(5, 5, handler));
+    }
+    
+    public void onDeath() {
+        gameState = State.DEATH;
+        if (hasDB) {
+            try {
+                db.update(hud.getScore());
+                leaderboard = db.getScores(hud);
+            } catch (SQLException s) {
+                hasDB = false;
+                System.out.println(s.getMessage());
+            }
+        }
     }
     
     // Start the thread
@@ -99,18 +115,16 @@ public class Game extends Canvas implements Runnable {
             handler.render(g);
             hud.render(g);
         } else if (gameState == State.DEATH) {
+            // TODO: Move menu to another class
             g.setColor(Color.BLACK);
             g.drawString("Press R to Retry", 16, 16);
             
-            if (hasDB) {
-                try {
-                    g.drawString("Final Score: " + hud.getScore(), 16, 32);
-                    db.update(hud.getScore());
-                    g.drawString("Leader Boards: " + db.getScores(hud), 16, 64);
-                } catch (SQLException s) {
-                    hasDB = false;
-                    System.out.println(s.getMessage());
-                }
+            int leaderboardY = 48;
+            g.drawString("Final Score: " + hud.getScore(), 16, 32);
+            g.drawString("Leaderboard:", 16, leaderboardY +=16);
+            g.drawString("Name - Score", 16, leaderboardY +=16);
+            for (String line : leaderboard.split("\n")) {
+                g.drawString(line, 16, leaderboardY += 16);
             }
         }
         
