@@ -69,18 +69,18 @@ public class Snake extends GameObject {
 
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if (temp.getID() == ID.Board) {
-                ((Board) temp).removeUnoccupiedSpace(getPosition());
+        //    if (temp.getID() == ID.Board) {
+          //      ((Board) temp).removeUnoccupiedSpace(getPosition());
             }
-        }
+  //      }
     }
 
     public void removeSnakePart() {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if (temp.getID() == ID.Board) {
-                ((Board) temp).addUnoccupiedSpace(snakeParts.get(0));
-            }
+            //if (temp.getID() == ID.Board) {
+            //    ((Board) temp).addUnoccupiedSpace(snakeParts.get(0));
+            //}
         }
 
         snakeParts.remove(0);

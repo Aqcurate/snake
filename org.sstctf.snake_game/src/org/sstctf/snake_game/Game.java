@@ -23,7 +23,7 @@ public class Game extends Canvas implements Runnable {
     private boolean hasDB;
     private String leaderboard;
     
-    public static State gameState = State.GAME;
+    public static State gameState = State.	GAME;
     
     public Game() {
         handler = new Handler();

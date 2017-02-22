@@ -15,18 +15,17 @@ public class Board extends GameObject{
     public Board(int width, int length, Handler handler){
         super(0, 0, ID.Board);
         this.handler = handler;
-        for (int i = 1; i < (Game.WIDTH/Game.SCALE) - 1; i++) {
+ /*       for (int i = 1; i < (Game.WIDTH/Game.SCALE) - 1; i++) {
             for (int j = 1; j < (Game.HEIGHT/Game.SCALE) - 1; j++) {
                 unoccupiedSpaces.add(new int[] {i, j});
             }
         }
     }
-
     public List<int[]> getUnoccupiedSpaces() {
         return unoccupiedSpaces;
     }
 
-    public void removeUnoccupiedSpace(int[] space) {
+   public void removeUnoccupiedSpace(int[] space) {
         for (int i = 0; i < unoccupiedSpaces.size(); i++) {
             if (Arrays.equals(unoccupiedSpaces.get(i), space)) {
                 unoccupiedSpaces.remove(i);
@@ -34,10 +33,10 @@ public class Board extends GameObject{
             }
         }
     }
-
-    public void addUnoccupiedSpace(int[] space) {
+}
+        public void addUnoccupiedSpace(int[] space) {
         unoccupiedSpaces.add(space);
-    }
+*/   }
 
     @Override
     public void tick() {
