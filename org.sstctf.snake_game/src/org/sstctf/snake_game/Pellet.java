@@ -28,12 +28,13 @@ public class Pellet extends GameObject {
             }
         }
         Random random = new Random();
-        while (true) {
-            int[] i =  {random.nextInt(38), random.nextInt(38)};
+        while (occupiedSpaces.size() != 1444) {
+            int[] i =  {random.nextInt(38)+1, random.nextInt(38)+1};
             if (!occupiedSpaces.contains(i)) {
                 return i;
             }
         }
+        return new int[]{-1, -1};
     }
 
     public void setPellet(boolean isPellet) {
