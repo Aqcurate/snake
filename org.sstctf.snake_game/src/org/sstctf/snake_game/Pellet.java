@@ -31,9 +31,9 @@ public class Pellet extends GameObject {
         Random random = new Random();
         while (occupiedSpaces.size() != 1444) {
             int[] spawn =  {random.nextInt(38)+1, random.nextInt(38)+1};
-            if (checkSpace(spawn,occupiedSpaces)) {
+            if (checkSpace(spawn, occupiedSpaces)) {
                 System.out.println(occupiedSpaces.size());
-            	return spawn;
+                return spawn;
             }
         }
         return new int[]{-1, -1};
