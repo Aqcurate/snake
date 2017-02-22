@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -29,14 +30,24 @@ public class Pellet extends GameObject {
         }
         Random random = new Random();
         while (occupiedSpaces.size() != 1444) {
-            int[] i =  {random.nextInt(38)+1, random.nextInt(38)+1};
-            if (!occupiedSpaces.contains(i)) {
-                return i;
+            int[] spawn =  {random.nextInt(38)+1, random.nextInt(38)+1};
+            if (checkSpace(spawn, occupiedSpaces)) {
+                System.out.println(occupiedSpaces.size());
+                return spawn;
             }
         }
         return new int[]{-1, -1};
     }
-
+    
+    private boolean checkSpace(int[] spawn, List<int[]> occupiedSpaces){
+    	for (int i = 0; i < occupiedSpaces.size(); i++) {
+    		if (Arrays.equals(occupiedSpaces.get(i), spawn)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
     public void setPellet(boolean isPellet) {
         this.isPellet = isPellet;
     }
