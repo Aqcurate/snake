@@ -4,39 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 // Game Board Class
 public class Board extends GameObject{
     private Handler handler;
-    private List<int[]> unoccupiedSpaces = new ArrayList<int[]>();
 
-    public Board(int width, int length, Handler handler){
+    public Board(int width, int length, Handler handler) {
         super(0, 0, ID.Board);
         this.handler = handler;
-        for (int i = 1; i < (Game.WIDTH/Game.SCALE) - 1; i++) {
-            for (int j = 1; j < (Game.HEIGHT/Game.SCALE) - 1; j++) {
-                unoccupiedSpaces.add(new int[] {i, j});
-            }
-        }
-    }
-
-    public List<int[]> getUnoccupiedSpaces() {
-        return unoccupiedSpaces;
-    }
-
-    public void removeUnoccupiedSpace(int[] space) {
-        for (int i = 0; i < unoccupiedSpaces.size(); i++) {
-            if (Arrays.equals(unoccupiedSpaces.get(i), space)) {
-                unoccupiedSpaces.remove(i);
-                break;
-            }
-        }
-    }
-
-    public void addUnoccupiedSpace(int[] space) {
-        unoccupiedSpaces.add(space);
     }
 
     @Override

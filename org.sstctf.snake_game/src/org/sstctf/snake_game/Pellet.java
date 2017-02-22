@@ -20,16 +20,21 @@ public class Pellet extends GameObject {
 
     // Makes sure the pellet spawns in an non occupied area
     public int[] randomSpawn() {
-        List<int[]> unoccupiedSpaces = null;
+        List<int[]> occupiedSpaces = null;
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
-            if (temp.getID() == ID.Board) {
-                unoccupiedSpaces = ((Board) temp).getUnoccupiedSpaces();
+            if (temp.getID() == ID.Snake) {
+                occupiedSpaces = (((Snake) temp).getSnakeParts());
             }
         }
-
         Random random = new Random();
-        return unoccupiedSpaces.get(random.nextInt(unoccupiedSpaces.size()));
+        while (occupiedSpaces.size() != 1444) {
+            int[] i =  {random.nextInt(38)+1, random.nextInt(38)+1};
+            if (!occupiedSpaces.contains(i)) {
+                return i;
+            }
+        }
+        return new int[]{-1, -1};
     }
 
     public void setPellet(boolean isPellet) {
