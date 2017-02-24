@@ -1,7 +1,10 @@
 package org.sstctf.snake_game;
 /**
  * 
- * This 
+ * Enumeration that describes the state of the game.
+ * 
+ * Game: Player is playing the game
+ * DEATH: Player lost
  * 
  * @author Andrew Quach
  * @author Stanislav Lyakhov

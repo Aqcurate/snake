@@ -5,7 +5,18 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This class represents the controllable character; the snake.
+ * The class handles player movement 
+ * as well as growth and collision
+ * 
+ * It is an object of the game and thus extends GameObject.
+ * 
+ * @author Andrew Quach
+ * @author Stanislav Lyakhov
+ *
+ * @version 1.0.0
+ */
 public class Snake extends GameObject {
     private int length;
     // Direction is where the snake actually goes
@@ -16,7 +27,14 @@ public class Snake extends GameObject {
 
     private Handler handler;
     private Game game;
-
+    
+/**
+ * 
+ * @param posX position of the snake on the X axis
+ * @param posY position of the snake on the Y axis
+ * @param handler handles all game objects
+ * @param game handles the game
+ */
     public Snake(int posX, int posY, Handler handler, Game game) {
         super(posX, posY, ID.Snake);
         direction = Direction.NONE;
@@ -28,6 +46,11 @@ public class Snake extends GameObject {
         this.game = game;
     }
 
+    /**
+     * Move in a certain direction
+     * 
+     * @param dir direction of movement of the snake
+     */
     // Moving the snake based on input direction
     public void move(Direction dir) {
         Direction lastDirection = direction;
@@ -51,19 +74,39 @@ public class Snake extends GameObject {
             break;
         }
     }
-
+    /**
+     * Setter for the direction
+     * 
+     * @param inputDirection
+     */
     public void setInputDirection(Direction inputDirection) {
         this.inputDirection = inputDirection;
     }
-
+    
+    /**
+     * Getter for snake length
+     * 
+     * @return length of the snake
+     */
     public int getLength() {
         return length;
     }
 
+    /**
+     * Getter for snake parts
+     * 
+     * @return list of snake parts
+     */
     public List<int[]> getSnakeParts() {
         return snakeParts;
     }
 
+    /**
+     * Describes collision of the snake with different objects.
+     * Handles growth of snake when snake collides with a Pellet.
+     * Handles snake collision with the wall.
+     * Handles snake collision with its body.
+     */
     public void collision() {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
@@ -95,6 +138,12 @@ public class Snake extends GameObject {
         }
     }
 
+    /**
+     * Override of GameObject tick method.
+     * Calls a move function during every tick.
+     * Checks collision every tick.
+     * Removes last part of snake.
+     */
     @Override
     public void tick() {
         move(inputDirection);
@@ -103,6 +152,12 @@ public class Snake extends GameObject {
         if (snakeParts.size() != length) snakeParts.remove(0);
     }
 
+    /**
+     * Override of GameObject render method.
+     * Renders the snake using green rectangles.
+     * 
+     * @param g the graphics object that draws on the canvas
+     */
     @Override
     public void render(Graphics g) {
         g.setColor(Color.GREEN);
@@ -111,6 +166,13 @@ public class Snake extends GameObject {
         }
     }
 
+
+    /**
+     * Override of GameObject getBounds method.
+     * Handles the hitboxes of the snake
+     * 
+     * @return hitboxes the collision hitboxes of the snake
+     */
     @Override
     public List<Rectangle> getBounds() {
         List<Rectangle> hitboxes = new ArrayList<Rectangle>();
