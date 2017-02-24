@@ -28,7 +28,7 @@ public class DBConnect {
         Connection conn = connectDB();
         StringBuilder sb = new StringBuilder();
         Statement stmt = conn.createStatement();
-        ResultSet results = stmt.executeQuery("SELECT * from leaderboards ORDER BY score DESC");
+        ResultSet results = stmt.executeQuery("SELECT * from leaderboards ORDER BY score DESC LIMIT 5");
         while (results.next()) {
             sb.append(results.getString("name") + " - " + results.getInt("score") + "\n");
         }
@@ -37,10 +37,11 @@ public class DBConnect {
         return sb.toString();
     }
 
-    public void update(int points) throws SQLException {
+    public void update(int points, String name) throws SQLException {
         Connection conn = connectDB();
-        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES ('guest2', ?)");
-        pstmt.setInt(1, points);
+        PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES (?, ?)");
+        pstmt.setString(1, name);
+        pstmt.setInt(2, points);
         pstmt.executeUpdate();
         conn.close();
     }
