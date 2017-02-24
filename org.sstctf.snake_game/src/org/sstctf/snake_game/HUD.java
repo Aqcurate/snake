@@ -12,7 +12,7 @@ import java.awt.Graphics;
  * of the screen.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */

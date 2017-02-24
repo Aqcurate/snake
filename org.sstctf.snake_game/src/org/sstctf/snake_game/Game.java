@@ -13,7 +13,7 @@ import java.awt.image.BufferStrategy;
  * game objects.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */
