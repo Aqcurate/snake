@@ -16,7 +16,7 @@ public class DeathScreen {
     private HUD hud;
     
     public DeathScreen(HUD hud) {
-        db = new DBConnect();
+        db = new DBConnect("jdbc:mysql://localhost/game?useSSL=false", "guest", "guest");
         hasDB = true;
         leaderboard = "";
         this.hud = hud;
@@ -29,7 +29,7 @@ public class DeathScreen {
                 String name = JOptionPane.showInputDialog("Enter your initials:", "");
                 if (name == null || name.equals("")) name = "AAA";
                 db.update(hud.getScore(), name);
-                leaderboard = db.getScores(hud);
+                leaderboard = db.getScores();
             } catch (SQLException s) {
                 hasDB = false;
                 System.out.println(s.getMessage());
