@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
 /**
  * This class represents the pellet that can be picked up by the snake.
  * The class deals with spawning the pellet
@@ -49,16 +50,23 @@ public class Pellet extends GameObject {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
             if (temp.getID() == ID.Snake) {
+                // Occupied Spaces are simply spaces where the snake parts are
                 occupiedSpaces = (((Snake) temp).getSnakeParts());
             }
         }
+        
+        // Generate random coordinates to spawn
         Random random = new Random();
+        
+        // Check if the board is full
         while (occupiedSpaces.size() != 1444) {
             int[] spawn =  {random.nextInt(38)+1, random.nextInt(38)+1};
             if (checkSpace(spawn, occupiedSpaces)) {
                 return spawn;
             }
         }
+        
+        // Return nonexistent coordinates if the board is full
         return new int[]{-1, -1};
     }
 
@@ -85,7 +93,8 @@ public class Pellet extends GameObject {
     /**
      * Sets the pellet to either existing/not existing
      * 
-     * @param isPellet
+     * @param isPellet isPellet is a boolean detailing whether a pellet
+     * exists on the current board or not
      */
     public void setPellet(boolean isPellet) {
         this.isPellet = isPellet;
@@ -95,6 +104,8 @@ public class Pellet extends GameObject {
      * Override of GameObject tick method.
      * Checks if pellet exists every tick,
      * if not spawns new pellet.
+     * 
+     * @see org.sstctf.snake_game.GameObject#tick()
      */
     @Override
     public void tick() {
@@ -108,6 +119,9 @@ public class Pellet extends GameObject {
      * Override of GameObject render method.
      * Handles the rendering of the pellet.
      * Yellow rectangle.
+     * 
+     * @param g the graphics object that draws on the canvas
+     * @see org.sstctf.snake_game.GameObject#render()
      */
     @Override
     public void render(Graphics g) {
@@ -120,6 +134,7 @@ public class Pellet extends GameObject {
      * Handles the hitboxes of the pellet.
      * 
      * @return the hitboxes of the pellet
+     * @see org.sstctf.snake_game.GameObject#getBounds()
      */
     @Override
     public List<Rectangle> getBounds() {
