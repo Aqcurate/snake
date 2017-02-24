@@ -23,7 +23,7 @@ public class DBConnect {
     private String pass;
 
     /**
-     * Initializes the information necessary to connect to the database
+     * Initializes the information necessary to connect to the database.
      * 
      * @param host the location of the database
      * @param user the username of the user accessing the database
@@ -36,7 +36,7 @@ public class DBConnect {
     }
     
     /**
-     * Helper method that creates the connection to the specified database
+     * Helper method that creates the connection to the specified database.
      * 
      * @return the SQL connection
      * @throws SQLException
@@ -68,6 +68,7 @@ public class DBConnect {
         conn.close();
         return sb.toString();
     }
+    
     /**
      * The method updates the leaderboards table with the current score.
      * The query consists of the user inputed name and their corresponding score.

@@ -31,7 +31,7 @@ public class Board extends GameObject{
     }
 
     /**
-     * Mandatory override of GameObject tick method
+     * Mandatory override of GameObject tick method.
      * 
      * @see org.sstctf.snake_game.GameObject#tick()
      */
@@ -40,7 +40,7 @@ public class Board extends GameObject{
     }
 
     /**
-     * Override of GameObject render method
+     * Override of GameObject render method.
      * Renders the gameboard blue with a black border.
      * 
      * @param g the graphics object that draws on the canvas
@@ -58,9 +58,9 @@ public class Board extends GameObject{
     }
 
     /**
-     * Override of GameObject getBounds method
-     * Generates the boundaries for the gameboard walls
-     * Hitboxes are represented with a list of rectangles
+     * Override of GameObject getBounds method.
+     * Generates the boundaries for the gameboard walls.
+     * Hitboxes are represented with a list of rectangles.
      * 
      * @return hitboxes the list of rectangles that represent the hitbox
      * @see org.sstctf.snake_game.GameObject#getBounds()
