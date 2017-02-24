@@ -62,7 +62,7 @@ public class Board extends GameObject{
      * Generates the boundaries for the gameboard walls.
      * Hitboxes are represented with a list of rectangles.
      * 
-     * @return hitboxes the list of rectangles that represent the hitbox
+     * @return the list of rectangles that represent the hitbox
      * @see org.sstctf.snake_game.GameObject#getBounds()
      */
     @Override
