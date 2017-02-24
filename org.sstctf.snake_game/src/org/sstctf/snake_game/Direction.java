@@ -1,6 +1,13 @@
 package org.sstctf.snake_game;
 
-// Enumerating out directions the Snake can move
+/**
+ * This class enumerates out the directions the snake can move.
+ * 
+ * @author Andrew Quach
+ * @author Stanislav Lyahkov
+ *
+ * @version 1.0.0
+ */
 public enum Direction {
     NORTH,
     SOUTH,
@@ -8,7 +15,13 @@ public enum Direction {
     WEST,
     NONE;
 
-    // Finding the complements to the directions
+    /**
+     * The method finds the complements to the direction
+     * of the object that calls it.
+     * 
+     * @return the opposite of the direction of the object
+     * that calls it
+     */
     public Direction opposite() {
         switch(this) {
             case NORTH: return Direction.SOUTH;
