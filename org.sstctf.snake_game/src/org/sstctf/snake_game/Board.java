@@ -19,7 +19,6 @@ import java.util.List;
  * @version 1.0.0
  */
 public class Board extends GameObject{
-
     /**
      * Creates the gameboard given a width and length.
      * Sets the ID of the object to Board.
@@ -27,7 +26,6 @@ public class Board extends GameObject{
      * @param width the width of the board
      * @param length the length of the board
      */
-    
     public Board(int width, int length) {
         super(0, 0, ID.Board);
     }
