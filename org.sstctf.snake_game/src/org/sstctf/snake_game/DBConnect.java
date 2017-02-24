@@ -12,7 +12,7 @@ import java.sql.Statement;
  * It handles the insertion and retrieval of top scores on the leaderboard.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */

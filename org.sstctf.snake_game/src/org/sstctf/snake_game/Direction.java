@@ -4,7 +4,7 @@ package org.sstctf.snake_game;
  * This class enumerates out the directions the snake can move.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */

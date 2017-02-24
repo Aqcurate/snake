@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * On death, the gameState gets changed to the DEATH state.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */

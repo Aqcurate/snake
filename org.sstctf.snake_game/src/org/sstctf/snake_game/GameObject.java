@@ -10,7 +10,7 @@ import java.util.List;
  * Stores the current position and ID of all game objects.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  *
  * @version 1.0.0
  */

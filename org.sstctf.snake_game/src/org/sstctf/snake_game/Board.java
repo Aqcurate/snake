@@ -14,7 +14,7 @@ import java.util.List;
  * It is an object of the game and thus extends GameObject.
  * 
  * @author Andrew Quach
- * @author Stanislav Lyahkov
+ * @author Stanislav Lyakhov
  * 
  * @version 1.0.0
  */
