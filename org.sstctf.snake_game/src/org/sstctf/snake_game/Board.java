@@ -4,60 +4,80 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-// Game Board Class
+/**
+ * This class represents the snake gameboard.
+ * The class deals with the rendering of the gameboard
+ * and the hitboxes of the gameboard edges.
+ * 
+ * It is an object of the game and thus extends GameObject.
+ * 
+ * @author Andrew Quach
+ * @author Stanislav Lyahkov
+ * 
+ * @version 1.0.0
+ */
 public class Board extends GameObject{
-    private Handler handler;
-    private List<int[]> unoccupiedSpaces = new ArrayList<int[]>();
 
-    public Board(int width, int length, Handler handler){
+    /**
+     * Creates the gameboard given a width and length.
+     * Sets the ID of the object to Board.
+     * 
+     * @param width the width of the board
+     * @param length the length of the board
+     */
+    
+    public Board(int width, int length) {
         super(0, 0, ID.Board);
-        this.handler = handler;
-        for (int i = 1; i < (Game.WIDTH/Game.SCALE) - 1; i++) {
-            for (int j = 1; j < (Game.HEIGHT/Game.SCALE) - 1; j++) {
-                unoccupiedSpaces.add(new int[] {i, j});
-            }
-        }
     }
 
-    public List<int[]> getUnoccupiedSpaces() {
-        return unoccupiedSpaces;
-    }
-
-    public void removeUnoccupiedSpace(int[] space) {
-        for (int i = 0; i < unoccupiedSpaces.size(); i++) {
-            if (Arrays.equals(unoccupiedSpaces.get(i), space)) {
-                unoccupiedSpaces.remove(i);
-                break;
-            }
-        }
-    }
-
-    public void addUnoccupiedSpace(int[] space) {
-        unoccupiedSpaces.add(space);
-    }
-
+    /**
+     * Mandatory override of GameObject tick method
+     * 
+     * @see org.sstctf.snake_game.GameObject#tick()
+     */
     @Override
     public void tick() {
     }
 
+    /**
+     * Override of GameObject render method
+     * Renders the gameboard blue with a black border.
+     * 
+     * @param g the graphics object that draws on the canvas
+     * @see org.sstctf.snake_game.GameObject#render()
+     */
     @Override
     public void render(Graphics g) {
+        // Black gameboard border
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+        
+        // Blue gameboard interior
         g.setColor(Color.BLUE);
-        g.fillRect(Game.SCALE, Game.SCALE, Game.WIDTH-32, Game.HEIGHT-32);
+        g.fillRect(Game.SCALE, Game.SCALE, Game.WIDTH-Game.SCALE*2, Game.HEIGHT-Game.SCALE*2);
     }
 
+    /**
+     * Override of GameObject getBounds method
+     * Generates the boundaries for the gameboard walls
+     * Hitboxes are represented with a list of rectangles
+     * 
+     * @return hitboxes the list of rectangles that represent the hitbox
+     * @see org.sstctf.snake_game.GameObject#getBounds()
+     */
     @Override
     public List<Rectangle> getBounds() {
         List<Rectangle> hitboxes = new ArrayList<Rectangle>();
+        // Left gameboard wall
         hitboxes.add(new Rectangle(0, 0, Game.SCALE, Game.HEIGHT));
+        // Right gameboard wall
         hitboxes.add(new Rectangle(Game.WIDTH-Game.SCALE, 0, Game.SCALE, Game.HEIGHT));
-        hitboxes.add(new Rectangle(Game.SCALE, 0, Game.WIDTH-32, Game.SCALE));
-        hitboxes.add(new Rectangle(Game.SCALE, Game.HEIGHT-Game.SCALE, Game.WIDTH-32, Game.SCALE));
+        // Top gameboard wall
+        hitboxes.add(new Rectangle(Game.SCALE, 0, Game.WIDTH-Game.SCALE*2, Game.SCALE));
+        // Bottom gameboard wall
+        hitboxes.add(new Rectangle(Game.SCALE, Game.HEIGHT-Game.SCALE, Game.WIDTH-Game.SCALE*2, Game.SCALE));
         return hitboxes;
     }
 }

@@ -7,12 +7,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * This class handles connecting to the MySQL Database.
+ * It handles the insertion and retrieval of top scores on the leaderboard.
+ * 
+ * @author Andrew Quach
+ * @author Stanislav Lyahkov
+ *
+ * @version 1.0.0
+ */
 public class DBConnect {
 
     private String host;
     private String user;
     private String pass;
 
+    /**
+     * Initializes the information necessary to connect to the database
+     * 
+     */
     public DBConnect() {
         host = "jdbc:mysql://localhost/game?useSSL=false";
         user = "guest";

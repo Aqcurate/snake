@@ -37,7 +37,7 @@ public class Game extends Canvas implements Runnable {
         this.addKeyListener(new KeyInput(handler, this));
         
         new Window(WIDTH, HEIGHT, NAME, this);
-        handler.addObject(new Board(0, 0, handler));
+        handler.addObject(new Board(0, 0));
         handler.addObject(new Snake(1, 1, handler, this));
         handler.addObject(new Pellet(5, 5, handler));
     }
