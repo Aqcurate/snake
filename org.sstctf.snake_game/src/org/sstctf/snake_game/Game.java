@@ -49,7 +49,7 @@ public class Game extends Canvas implements Runnable {
         setIgnoreRepaint(true);
         setBounds(0, 0, WIDTH, HEIGHT+100);
         // Add key listener
-        this.addKeyListener(new KeyInput(handler, this));
+        this.addKeyListener(new KeyInput(handler));
         // Create new window
         new Window(WIDTH, HEIGHT, NAME, this);
         // Add main game objects

@@ -9,6 +9,7 @@ package org.sstctf.snake_game;
  * @author Andrew Quach
  * @author Stanislav Lyakhov
  *
+ * @version 1.0.0
  */
 
 public enum State {

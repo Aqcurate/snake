@@ -55,7 +55,7 @@ public class Snake extends GameObject {
      * @param dir direction of movement of the snake
      */
     // Moving the snake based on input direction
-    public void move(Direction dir) {
+    private void move(Direction dir) {
         Direction lastDirection = direction;
         // If the length is not 1, the snake cannot move into itself
         if (length == 1 || lastDirection != dir.opposite()) direction = dir;
@@ -117,7 +117,7 @@ public class Snake extends GameObject {
      * Handles snake collision with the wall.
      * Handles snake collision with its body.
      */
-    public void collision() {
+    private void collision() {
         for (int i = 0; i < handler.objects.size(); i++) {
             GameObject temp = handler.objects.get(i);
             // Game over if the Snake head collides with its body
