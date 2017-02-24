@@ -26,7 +26,8 @@ public class DeathScreen {
         Game.gameState = State.DEATH;
         if (hasDB) {
             try {
-                String name = JOptionPane.showInputDialog("Enter your initials:");
+                String name = JOptionPane.showInputDialog("Enter your initials:", "");
+                if (name == null || name.equals("")) name = "AAA";
                 db.update(hud.getScore(), name);
                 leaderboard = db.getScores(hud);
             } catch (SQLException s) {

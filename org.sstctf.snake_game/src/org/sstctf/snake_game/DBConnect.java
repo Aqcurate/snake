@@ -40,6 +40,8 @@ public class DBConnect {
     public void update(int points, String name) throws SQLException {
         Connection conn = connectDB();
         PreparedStatement pstmt = conn.prepareStatement("INSERT INTO leaderboards (name, score) VALUES (?, ?)");
+        name += "   ";
+        name = name.substring(0, 3).toUpperCase();
         pstmt.setString(1, name);
         pstmt.setInt(2, points);
         pstmt.executeUpdate();

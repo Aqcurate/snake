@@ -32,7 +32,6 @@ public class Pellet extends GameObject {
         while (occupiedSpaces.size() != 1444) {
             int[] spawn =  {random.nextInt(38)+1, random.nextInt(38)+1};
             if (checkSpace(spawn, occupiedSpaces)) {
-                System.out.println(occupiedSpaces.size());
                 return spawn;
             }
         }
